@@ -10,13 +10,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+
 input_dir = 'IN'
 text_dir  = 'TXT'
 input_excel = 'metabolism_imports.xlsx'
 
 test_in = input_dir + '/' + input_excel
-
 test_ws = None
+
+out_dir = 'OUT'
+plot_dir = out_dir + '/' + 'Plots'
 
 ts_code_col = 'Time stamp code'
 ts_formatted_col = 'Time (s)'
@@ -71,5 +74,6 @@ for name, data in test_data.items():
     ax.legend()
     plt.xlabel(ts_formatted_col)
     plt.ylabel('O2 [%Air Saturation]')
+    plt.savefig(plot_dir + '/' + name + '.png', bbox_inches='tight',pad_inches=0,transparent=True)
     plt.show()
     
