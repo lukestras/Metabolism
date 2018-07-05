@@ -18,6 +18,8 @@ test_ws = None
 ts_code_col = 'Time stamp code'
 ts_formatted_col = 'Time (s)'
 
+drop_col_words = ['temp', 'phase']
+
 """
 Number of rows to be dropped to reach data
 Note that this may change when working with raw txt, and also calibration data 
@@ -32,9 +34,16 @@ test_cal  = pd.read_excel(test_in, sheet_name=test_ws, skiprows=calibration_star
 test_data = pd.read_excel(test_in, sheet_name=test_ws, skiprows=calibration_rows)
 
 """
-infer timestamps by getting timestamps - min(timestamps)
+Process your data so it's actually good
 """
-
 for name, data in test_data.items():
-    #print(name)
+    """
+    infer timestamps by getting timestamps - min(timestamps)
+    """
     data[ts_formatted_col] = data.loc[:,ts_code_col] - data.loc[:,ts_code_col].min()
+    """
+    Drop columns that aren't O2 related
+    """
+    for word in drop_col_words:
+        data = data[data.columns.drop()]
+        #TODO: FInish
