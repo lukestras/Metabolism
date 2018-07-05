@@ -8,7 +8,7 @@ import pandas as pd
 import re
 import numpy as np
 import matplotlib.pyplot as plt
-
+import matplotlib.collections as collections
 
 
 input_dir = 'IN'
@@ -53,6 +53,10 @@ for name, data in test_data.items():
     for word in drop_col_words:
         data = data[data.columns.drop(list(data.filter(regex=word)))]
     
+    for col in data.columns:
+        if data[col].isnull().all():
+            data = data.drop(columns=col)
+    
     test_data[name] = data
 
 """
@@ -67,14 +71,23 @@ for name, data in test_data.items():
     for col in plotted_cols:
         channel=re.search(r'(CH\s*\d+)',col)
         channel= channel[0]
-        ax.plot(ts_formatted_col,col, data=data, label=channel)
+        color = next(ax._get_lines.prop_cycler)['color']
+        ax.plot(ts_formatted_col,col, data=data, label=channel,color=color)
         #find @ 90% of max
         print(channel)
         threshold_val = (
                 data[col].iloc[0] - 0.1*(data[col].iloc[0]-data[col].min())) 
         #now slice from %90
         lin_df = data.iloc[data[data[col] < threshold_val].index[0]:]
+#        ax.plot(lin_df[ts_formatted_col].iloc[0],lin_df[col].iloc[0],
+#                color=color,marker='o',linestyle='',
+#                label= channel + 'linear')
+        lin_reg = np.polyfit(lin_df[ts_formatted_col],lin_df[col],1)
+        lin_f = np.poly1d(lin_reg)
+        ax.plot(data[ts_formatted_col], lin_f(data[ts_formatted_col]), 
+                linestyle='-.', color= color, label =channel + ' reg')
         print(channel + ' ' + str(lin_df[col].iloc[0]))
+        
     
     ax.set_title(name)
     ax.legend()
