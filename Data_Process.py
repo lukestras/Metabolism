@@ -60,7 +60,12 @@ for name, data in test_data.items():
     print(plotted_cols)
     #use np.polyfit(time, vals, )
     ax = plt.subplot(1,1,1)
-    ax.plot(data[ts_formatted_col],data[plotted_cols])
+    
+    for col in plotted_cols:
+        ax.plot(ts_formatted_col,col, data=data, label=col)
+    
+    ax.set_title(name)
+    ax.legend()
     plt.xlabel(ts_formatted_col)
     plt.ylabel('O2 [%Air Saturation]')
     plt.show()
