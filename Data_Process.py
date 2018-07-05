@@ -74,6 +74,6 @@ for name, data in test_data.items():
     ax.legend()
     plt.xlabel(ts_formatted_col)
     plt.ylabel('O2 [%Air Saturation]')
-    plt.savefig(plot_dir + '/' + name + '.png', bbox_inches='tight',pad_inches=0,transparent=True)
+    plt.savefig(plot_dir + '/' + name + '.png', bbox_inches='tight',pad_inches=0,transparent=False)
     plt.show()
     
