@@ -57,12 +57,15 @@ Now make charts, find gradients
 """
 for name, data in test_data.items():
     plotted_cols = list(data.filter(regex='O2'))
-    print(plotted_cols)
+    
     #use np.polyfit(time, vals, )
     ax = plt.subplot(1,1,1)
     
     for col in plotted_cols:
-        ax.plot(ts_formatted_col,col, data=data, label=col)
+        channel=re.search(r'(CH\s*\d+)',col)
+        channel= channel[0]
+        #print(channel)
+        ax.plot(ts_formatted_col,col, data=data, label=channel)
     
     ax.set_title(name)
     ax.legend()
