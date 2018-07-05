@@ -86,13 +86,14 @@ for name, data in test_data.items():
         lin_f = np.poly1d(lin_reg)
         ax.plot(data[ts_formatted_col], lin_f(data[ts_formatted_col]), 
                 linestyle='-.', color= color, label =channel + ' reg')
-        print(channel + ' ' + str(lin_df[col].iloc[0]))
+        print(channel + ' ',lin_df[col].iloc[0])
+        print(channel + ' y={0:0.3f}x + {1:0.2f}'.format(lin_reg[0],lin_reg[1]))
         
     
     ax.set_title(name)
     ax.legend()
     plt.xlabel(ts_formatted_col)
     plt.ylabel('O2 [%Air Saturation]')
-    plt.savefig(plot_dir + '/' + name + '.png', bbox_inches='tight',pad_inches=0,transparent=False)
+    plt.savefig(plot_dir + '/' + name + '.png', bbox_inches='tight',pad_inches=0,transparent=True)
     plt.show()
     
