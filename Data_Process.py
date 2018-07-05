@@ -60,15 +60,21 @@ Now make charts, find gradients
 """
 for name, data in test_data.items():
     plotted_cols = list(data.filter(regex='O2'))
-    
+    print(name)
     #use np.polyfit(time, vals, )
     ax = plt.subplot(1,1,1)
     
     for col in plotted_cols:
         channel=re.search(r'(CH\s*\d+)',col)
         channel= channel[0]
-        #print(channel)
         ax.plot(ts_formatted_col,col, data=data, label=channel)
+        #find @ 90% of max
+        print(channel)
+        threshold_val = (
+                data[col].iloc[0] - 0.1*(data[col].iloc[0]-data[col].min())) 
+        #now slice from %90
+        lin_df = data.iloc[data[data[col] < threshold_val].index[0]:]
+        print(channel + ' ' + str(lin_df[col].iloc[0]))
     
     ax.set_title(name)
     ax.legend()
