@@ -23,4 +23,5 @@ someplace good
 """
 calibration_rows = 13 
 
-test_df = pd.read_excel()
+test_cal  = pd.read_excel(test_in, sheet_name=test_ws, skiprows=1, skipfooter=13)
+test_data = pd.read_excel(test_in, sheet_name=test_ws, skiprows=13)
