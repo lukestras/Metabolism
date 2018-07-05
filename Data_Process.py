@@ -84,10 +84,11 @@ for name, data in test_data.items():
 #                label= channel + 'linear')
         lin_reg = np.polyfit(lin_df[ts_formatted_col],lin_df[col],1)
         lin_f = np.poly1d(lin_reg)
+        lin_eq = '={0:0.3f}x + {1:0.0f}'.format(lin_reg[0],lin_reg[1])
         ax.plot(data[ts_formatted_col], lin_f(data[ts_formatted_col]), 
-                linestyle='-.', color= color, label =channel + ' reg')
+                linestyle='-.', color= color, label =channel + ' r' + lin_eq)
         print(channel + ' ',lin_df[col].iloc[0])
-        print(channel + ' y={0:0.3f}x + {1:0.2f}'.format(lin_reg[0],lin_reg[1]))
+        print(channel + ' reg' + lin_eq)
         
     
     ax.set_title(name)
