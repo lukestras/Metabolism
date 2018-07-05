@@ -5,6 +5,9 @@ Created on Thu Jul  5 15:41:13 2018
 @author: Matthew Strasiotto
 """
 import pandas as pd
+import re
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 input_dir = 'IN'
@@ -45,10 +48,20 @@ for name, data in test_data.items():
     Drop columns that aren't O2 related
     """
     for word in drop_col_words:
-        test_data[name] = data[data.columns.drop(list(data.filter(regex=word)))]
+        data = data[data.columns.drop(list(data.filter(regex=word)))]
+    
+    test_data[name] = data
 
 """
 Now make charts, find gradients
 """
-#for name, data in test_data.items():
-#    
+for name, data in test_data.items():
+    plotted_cols = list(data.filter(regex='O2'))
+    print(plotted_cols)
+    #use np.polyfit(time, vals, )
+    ax = plt.subplot(1,1,1)
+    ax.plot(data[ts_formatted_col],data[plotted_cols])
+    plt.xlabel(ts_formatted_col)
+    plt.ylabel('O2 [%Air Saturation]')
+    plt.show()
+    
