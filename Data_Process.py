@@ -18,7 +18,7 @@ test_ws = None
 ts_code_col = 'Time stamp code'
 ts_formatted_col = 'Time (s)'
 
-drop_col_words = ['temp', 'phase']
+drop_col_words = [r'temp', r'phase']
 
 """
 Number of rows to be dropped to reach data
@@ -45,5 +45,10 @@ for name, data in test_data.items():
     Drop columns that aren't O2 related
     """
     for word in drop_col_words:
-        data = data[data.columns.drop()]
-        #TODO: FInish
+        test_data[name] = data[data.columns.drop(list(data.filter(regex=word)))]
+
+"""
+Now make charts, find gradients
+"""
+#for name, data in test_data.items():
+#    
