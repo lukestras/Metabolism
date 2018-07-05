@@ -21,7 +21,9 @@ Note that this may change when working with raw txt, and also calibration data
 is PROBABLY of interest to analysis, so consider storing these headers 
 someplace good
 """
-calibration_rows = 13 
+calibration_rows = 13
+calibration_start = 6
+calibration_len   = 4 
 
-test_cal  = pd.read_excel(test_in, sheet_name=test_ws, skiprows=1, skipfooter=13)
-test_data = pd.read_excel(test_in, sheet_name=test_ws, skiprows=13)
+test_cal  = pd.read_excel(test_in, sheet_name=test_ws, skiprows=calibration_start, nrows=calibration_len)
+test_data = pd.read_excel(test_in, sheet_name=test_ws, skiprows=calibration_rows)
