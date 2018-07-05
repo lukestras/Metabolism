@@ -36,5 +36,5 @@ infer timestamps by getting timestamps - min(timestamps)
 """
 
 for name, data in test_data.items():
-    print(name)
+    #print(name)
     data[ts_formatted_col] = data.loc[:,ts_code_col] - data.loc[:,ts_code_col].min()
