@@ -29,6 +29,9 @@ k_data = 'DATA'
 
 k_O2 = 'O2 [%Air Saturation]'
 
+kw_grad = 'gradient'
+kw_offset = 'offset'
+
 """
 Capturing Groups
 """
