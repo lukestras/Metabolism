@@ -8,7 +8,7 @@ import pandas as pd
 import namespace as nm
 import re
 
-def clean_data(data_in, calib_in):
+def clean_data(data_in):
     data = data_in.copy()
     """
     infer timestamps by getting timestamps - min(timestamps)
@@ -19,14 +19,23 @@ def clean_data(data_in, calib_in):
     
     for col in data.columns:
         col_dict[col] = col
-        match = re.search(r'(?P<bad>\S+ *,)\s*(?P<channel>CH)\s*(?P<channel_n>\d+)(?P<unit>\s+.*)',col_dict[col])
+        match = re.search(nm.g_bad+nm.g_channel+nm.g_channel_n+nm.g_unit,col_dict[col])
         if match:
-            col_dict[col] = match.group('channel') + match.group('channel_n') + match.group('unit')
+            col_dict[col] = match.group(nm.k_channel) + match.group(nm.k_channel_n) + match.group(nm.k_unit)
     
     data = data.rename(col_dict, axis='columns')
     #drop all na cols
     for col in data.columns:
         if data[col].isnull().all():
             data = data.drop(columns=col)    
+    
+    return data
+
+def clean_cal(data_in):
+    data = data_in.copy()
+    
+    for col in data.columns:
+        if data[col].isnull().all():
+            data = data.drop(columns=col)
     
     return data

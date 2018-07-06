@@ -8,7 +8,11 @@ Created on Fri Jul  6 18:25:28 2018
 ts_code_col = 'Time stamp code'
 ts_formatted_col = 'Time (s)'
 
-drop_col_words = [r'temp', r'phase']
+#drop_col_words = [r'temp', r'phase']
+
+cal_in_param_channel= 'Parameter/Channel'
+cal_out_param       = 'Parameter'
+cal_out_channel     = 'Channel'
 
 """
 Number of rows to be dropped to reach data

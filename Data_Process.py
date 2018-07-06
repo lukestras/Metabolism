@@ -34,7 +34,8 @@ Process your data so it's actually good
 """
 for name, data in test_data.items():
     
-    test_data[name] = work.clean_data(data, test_cal[name])
+    test_data[name] = work.clean_data(data)
+    test_cal[name]  = work.clean_cal(test_cal[name])
 
 """
 Now make charts, find gradients
