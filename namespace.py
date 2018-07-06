@@ -19,3 +19,6 @@ someplace good
 calibration_rows = 13
 calibration_start = 6
 calibration_len   = 4
+
+cal_key = 'CAL'
+data_key = 'DATA'

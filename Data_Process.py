@@ -46,7 +46,7 @@ for name, data in test_data.items():
     ax = plt.subplot(1,1,1)
     
     for col in plotted_cols:
-        channel=re.search(r'(CH\s*\d+)',col)
+        channel= re.search(r'(CH\s*\d+)',col)
         channel= channel[0]
         color = next(ax._get_lines.prop_cycler)['color']
         ax.plot(nm.ts_formatted_col,col, data=data, label=channel,color=color)
