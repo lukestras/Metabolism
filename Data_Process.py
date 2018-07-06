@@ -52,7 +52,7 @@ for name, data in test_data.items():
         color = next(ax._get_lines.prop_cycler)['color']
         ax.plot(nm.ts_formatted_col,col, data=data, label=channel,color=color)
         #find @ 90% of max
-        print(channel)
+        #print(channel)
         threshold_val = (
                 data[col].iloc[0] - 0.1*(data[col].iloc[0]-data[col].min())) 
         """
@@ -69,14 +69,14 @@ for name, data in test_data.items():
         lin_eq = '={0:0.3f}x + {1:0.0f}'.format(lin_reg[0],lin_reg[1])
         ax.plot(data[nm.ts_formatted_col], lin_f(data[nm.ts_formatted_col]), 
                 linestyle='-.', color= color, label =channel + ' r' + lin_eq)
-        print(channel + ' ',lin_df[col].iloc[0])
-        print(channel + ' reg' + lin_eq)
+        #print(channel + ' ',lin_df[col].iloc[0])
+        #print(channel + ' reg' + lin_eq)
         
     
     ax.set_title(name)
     ax.legend()
     plt.xlabel(nm.ts_formatted_col)
-    plt.ylabel('O2 [%Air Saturation]')
+    plt.ylabel(nm.k_O2)
     plt.savefig(plot_dir + '/' + name + '.png', bbox_inches='tight',pad_inches=0,transparent=True)
     plt.show()
     
