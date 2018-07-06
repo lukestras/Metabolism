@@ -45,18 +45,16 @@ def clean_cal(data_in):
     data = data.join(info)
     return data
 
-def find_gradient(data_in, cal, x_col, y_col, x_lo=None, x_hi=None):
+def find_gradient(data_in, x_col, y_col, x_lo=None, x_hi=None):
     data = data_in.copy()
-    match = re.search(nm.g_channel+nm.g_channel_n, y_col)
-    
-    ch     = match.group(nm.k_channel)
-    ch_num = match.group(nm.k_channel_n)
-    
+
+    """
+    Unless otherwise specified, slice from 90% to %10
+    """
     y_range = data[y_col].iloc[0]-data[y_col].min()
     thresh_range = 0.1*y_range
-    
     hi_thresh_val = data[y_col].iloc[0] - thresh_range
-    lo_thresh_val = data[y_col].min() + thresh_range
+    lo_thresh_val = data[y_col].min() + thresh_range/2
     
     lin_df = data.iloc[data[data[y_col] < hi_thresh_val].index[0]:]
     if x_hi:    
@@ -67,6 +65,6 @@ def find_gradient(data_in, cal, x_col, y_col, x_lo=None, x_hi=None):
     else:
         lin_df = lin_df.iloc[:len(lin_df[lin_df[y_col] > lo_thresh_val].index)]
     
-    lin_reg = np.polyfit(lin_df[nm.ts_formatted_col],lin_df[y_col],1)
+    lin_reg = np.polyfit(lin_df[x_col],lin_df[y_col],1)
     
     return lin_reg
