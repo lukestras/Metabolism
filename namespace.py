@@ -24,13 +24,15 @@ calibration_rows = 13
 calibration_start = 6
 calibration_len   = 4
 
-cal_key = 'CAL'
-data_key = 'DATA'
+k_cal = 'CAL'
+k_data = 'DATA'
+
+k_O2 = 'O2 [%Air Saturation]'
 
 """
 Capturing Groups
 """
-k_bad       = r'bad'
+k_bad       = r'param'
 k_channel   = r'channel'
 k_channel_n = r'channel_n'
 k_unit      = r'unit'
