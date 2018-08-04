@@ -46,9 +46,30 @@ def read_text(file_name):
 """
 Read everything in a folder into a dict of dicts of dframes
 the hierachy is CAL/DATA->sheet_name
+this is consistent with the output of the read_excel function
+accepts a folder name, and a list of files within to read
+if given just a folder name, will try to read all text files within
 """
 def read_text_folder(folder_name, files_to_read=None):
+    out = {}
+    out[nm.k_cal] = {}
+    out[nm.k_data] = {}
+    
+    folder = pathlib.Path(folder_name)
+    if not folder.is_dir():
+        return None
+    
+    # if not specified a list
     if not files_to_read:
-        print("Uh oh")
-        # placeholder, actually do everything unless a list is specified
-    return
+        files_to_read = []
+        # iterate over the contents of the directory, and add any files 
+        # that end in ".txt" to the list
+        for child in folder.iterdir():
+            if child.is_file() and '.txt' == child.suffix:
+                files_to_read += child.name
+    
+    for filename in files_to_read:
+        single_file_dict = read_text(filename)
+        out[nm.k_cal][filename] = single_file_dict[nm.k_cal]
+        out[nm.k_data][filename] = single_file_dict[nm.k_data]
+    return out
