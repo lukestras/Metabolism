@@ -44,3 +44,12 @@ g_bad       = r'(?P<' +k_bad+ r'>\S+ *,)\s*'
 g_channel   = r'(?P<' +k_channel+ r'>CH)\s*'
 g_channel_n = r'(?P<' +k_channel_n+ r'>\d+)'
 g_unit      = r'(?P<' +k_unit+ r'>\s+.*)'
+
+
+"""
+TODO: Implement a linear domain table
+this will allow users to set the linear domain for each channel of 
+each sheet
+by default, if unset, the program should use default domain inference
+(the 90% threshholds)
+"""
