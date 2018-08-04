@@ -28,6 +28,7 @@ def read_excel(workbook_name):
     data_tables = pd.read_excel(workbook_name, sheet_name=None, skiprows=nm.calibration_rows)
     out = {}
     out[nm.k_cal] = cal_tables
+    
     out[nm.k_data] = data_tables
     
     return out
@@ -37,7 +38,7 @@ Read a single text file, and return a dict of CAL, DATA
 Will need to unpack the output of this a little to put it in a TYPE->Name hierachy
 """
 def read_text(file_name):
-    separator = r'\t'
+    separator = '\t'
     out = {}
     out[nm.k_cal] = pd.read_csv(file_name, sep=separator, skiprows=nm.calibration_start, nrows=nm.calibration_len)
     out[nm.k_data]= pd.read_csv(file_name, sep=separator, skiprows=nm.calibration_rows)
@@ -57,6 +58,7 @@ def read_text_folder(folder_name, files_to_read=None):
     
     folder = pathlib.Path(folder_name)
     if not folder.is_dir():
+        print("Invalid directory name!")
         return None
     
     # if not specified a list
@@ -66,9 +68,11 @@ def read_text_folder(folder_name, files_to_read=None):
         # that end in ".txt" to the list
         for child in folder.iterdir():
             if child.is_file() and '.txt' == child.suffix:
-                files_to_read += child.name
-    
+                files_to_read += child
+                print("Gonna read " + child.name)
+    #print(files_to_read)
     for filename in files_to_read:
+        print(filename)
         single_file_dict = read_text(filename)
         out[nm.k_cal][filename] = single_file_dict[nm.k_cal]
         out[nm.k_data][filename] = single_file_dict[nm.k_data]

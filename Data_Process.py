@@ -18,7 +18,7 @@ text_dir  = 'TXT'
 input_excel = 'metabolism_imports.xlsx'
 
 test_in = input_dir + '/' + input_excel
-test_ws = None
+#test_ws = None
 
 out_dir = 'OUT'
 plot_dir = out_dir + '/' + 'Plots'
@@ -27,8 +27,8 @@ plot_dir = out_dir + '/' + 'Plots'
 
  
 
-test_cal  = pd.read_excel(test_in, sheet_name=test_ws, skiprows=nm.calibration_start, nrows=nm.calibration_len)
-test_data = pd.read_excel(test_in, sheet_name=test_ws, skiprows=nm.calibration_rows)
+test_cal  = pd.read_excel(test_in, sheet_name=None, skiprows=nm.calibration_start, nrows=nm.calibration_len)
+test_data = pd.read_excel(test_in, sheet_name=None, skiprows=nm.calibration_rows)
 
 """
 Process your data so it's actually good
