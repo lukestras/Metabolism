@@ -75,6 +75,6 @@ def read_text_folder(folder_name, files_to_read=None):
     for filename in files_to_read:
         #print(filename)
         single_file_dict = read_text(filename)
-        out[nm.k_cal][filename.name] = single_file_dict[nm.k_cal]
-        out[nm.k_data][filename.name] = single_file_dict[nm.k_data]
+        out[nm.k_cal][filename.stem] = single_file_dict[nm.k_cal]
+        out[nm.k_data][filename.stem] = single_file_dict[nm.k_data]
     return out
