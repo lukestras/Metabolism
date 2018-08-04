@@ -6,6 +6,7 @@ Created on Fri Jul  6 18:29:44 2018
 """
 import pandas as pd
 import namespace as nm
+import pathlib
 
 def write_out(data_dict, cal_dict, path):
     writer = pd.ExcelWriter(path)
@@ -23,8 +24,8 @@ each entry in CAL corresponds to the calibration header of the sheet,
 and each entry in DATA corresponds to the data body of the named sheet.
 """
 def read_excel(workbook_name):
-    cal_tables = pd.read_excel(test_in, sheet_name=test_ws, skiprows=nm.calibration_start, nrows=nm.calibration_len)
-    data_tables = pd.read_excel(test_in, sheet_name=test_ws, skiprows=nm.calibration_rows)
+    cal_tables = pd.read_excel(workbook_name, sheet_name=None, skiprows=nm.calibration_start, nrows=nm.calibration_len)
+    data_tables = pd.read_excel(workbook_name, sheet_name=None, skiprows=nm.calibration_rows)
     out = {}
     out[nm.k_cal] = cal_tables
     out[nm.k_data] = data_tables
