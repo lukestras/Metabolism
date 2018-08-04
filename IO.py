@@ -68,11 +68,12 @@ def read_text_folder(folder_name, files_to_read=None):
         # that end in ".txt" to the list
         for child in folder.iterdir():
             if child.is_file() and '.txt' == child.suffix:
-                files_to_read += child
-                print("Gonna read " + child.name)
-    #print(files_to_read)
+                files_to_read += [child]
+                # print("Gonna read " + child.name)
+                
+    #print("Files to read:\t", files_to_read)
     for filename in files_to_read:
-        print(filename)
+        #print(filename)
         single_file_dict = read_text(filename)
         out[nm.k_cal][filename] = single_file_dict[nm.k_cal]
         out[nm.k_data][filename] = single_file_dict[nm.k_data]
